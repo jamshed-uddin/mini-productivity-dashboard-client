@@ -19,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${ibmPlex.className} antialiased`}>{children}</body>
+      <body
+        className={`${ibmPlex.className} antialiased max-w-7xl h-screen overflow-hidden`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
