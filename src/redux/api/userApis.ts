@@ -3,7 +3,7 @@ import { baseApi } from "./baseApi";
 const userApis = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     loginUser: builder.mutation({
-      query: ({ data }) => ({
+      query: (data) => ({
         url: "/users/login",
         method: "POST",
         body: data,
@@ -11,7 +11,7 @@ const userApis = baseApi.injectEndpoints({
     }),
 
     registerUser: builder.mutation({
-      query: ({ data }) => ({
+      query: (data) => ({
         url: "/users/register",
         method: "POST",
         body: data,

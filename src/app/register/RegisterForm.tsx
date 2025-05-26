@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import Button from "@/components/Button";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
+import { useRegisterUserMutation } from "@/redux/api/userApis";
+import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
+import { useAppDispatch } from "@/hooks/hook";
+import { setUser } from "@/redux/features/userSlice";
+import Link from "next/link";
 
 type FormData = {
   name: string;
@@ -12,17 +17,31 @@ type FormData = {
 };
 
 const RegisterForm = () => {
+  const [registerUser, { isLoading }] = useRegisterUserMutation();
+  const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState("");
+  const dispatch = useAppDispatch();
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
 
-  const [showPassword, setShowPassword] = useState(false);
-
-  const onSubmit = (data: FormData) => {
-    console.log(data);
-    // TODO: Handle login logic
+  const onSubmit = async (data: FormData) => {
+    setError("");
+    try {
+      const res = await registerUser(data).unwrap();
+      localStorage.setItem("userInfo", JSON.stringify(res.data));
+      dispatch(setUser(res.data));
+      reset();
+    } catch (error) {
+      const fetchError = error as FetchBaseQueryError;
+      setError(
+        (fetchError.data as { message: string }).message ||
+          "Something went wrong"
+      );
+    }
   };
 
   return (
@@ -89,11 +108,24 @@ const RegisterForm = () => {
             </span>
           )}
         </div>
-
+        {error && (
+          <span className="block mb-2 text-red-500 text-sm">{error}</span>
+        )}
         <div className="flex justify-center">
-          <Button type="submit">Login</Button>
+          <Button type="submit" loading={isLoading} disabled={isLoading}>
+            Register
+          </Button>
         </div>
       </form>
+
+      <div className="mt-4 text-sm">
+        <h3>
+          Already have an account?{" "}
+          <Link href={"/login"} className="underline text-blue-500">
+            Login here
+          </Link>
+        </h3>
+      </div>
     </div>
   );
 };
