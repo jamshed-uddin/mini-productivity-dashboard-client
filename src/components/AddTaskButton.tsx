@@ -13,7 +13,7 @@ const AddTaskButton = () => {
   const closeModal = () => setIsOpen(false);
   const [create, { isLoading }] = useCreateTaskMutation();
 
-  const createTaskHandler = async (data: Task) => {
+  const createTaskHandler = (data: Task) => {
     return create(data).unwrap();
   };
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Button from "./Button";
 import { Task } from "@/lib/types";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,8 @@ const TaskForm = ({
   isSubmitting = false,
   onSubmitSuccess,
 }: TaskFormProps) => {
+  const [formChange, setFormChange] = useState(false);
+
   const {
     register,
     reset,
@@ -27,21 +29,25 @@ const TaskForm = ({
     formState: { errors },
   } = useForm<Task>();
 
-  const handleFormSubmit = async (data: Task) => {
+  const handleFormSubmit = (data: Task) => {
     try {
-      const res = await onSubmit(data);
-      toast.success("Task added");
+      const res = onSubmit(data);
+      toast.success(`Task ${initialData?._id ? "updated" : "added"}`);
       reset();
       onSubmitSuccess?.();
       console.log("task res", res);
     } catch {
-      toast.error("Failed to add task");
+      toast.error(`Failed to ${initialData?._id ? "update" : "add"} task`);
     }
   };
 
   return (
     <div>
-      <form className="space-y-4" onSubmit={handleSubmit(handleFormSubmit)}>
+      <form
+        className="space-y-4"
+        onSubmit={handleSubmit(handleFormSubmit)}
+        onChange={() => setFormChange(true)}
+      >
         {initialData?._id && (
           <input
             type="hidden"
@@ -123,8 +129,8 @@ const TaskForm = ({
           >
             Cancel
           </button>
-          <Button loading={isSubmitting} disabled={isSubmitting}>
-            Add task
+          <Button loading={isSubmitting} disabled={isSubmitting || !formChange}>
+            Save
           </Button>
         </div>
       </form>
