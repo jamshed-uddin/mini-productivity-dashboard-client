@@ -1,30 +1,34 @@
 "use client";
 
-import { HomeIcon } from "@heroicons/react/24/outline";
+import {
+  RectangleGroupIcon,
+  ListBulletIcon,
+  ClipboardDocumentListIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import React from "react";
 
 const links = [
   {
-    name: "Home",
+    name: "Overview",
     href: "/dashbord",
-    icon: HomeIcon,
+    icon: RectangleGroupIcon,
   },
   {
     name: "Task",
     href: "/dashbord/tasks",
-    icon: HomeIcon,
+    icon: ListBulletIcon,
   },
   {
     name: "Goals",
     href: "/dashbord/goals",
-    icon: HomeIcon,
+    icon: ClipboardDocumentListIcon,
   },
 ];
 
 const NavLinks = () => {
   return (
-    <div>
+    <div className="space-y-3">
       {links.map((link) => {
         const LinkIcon = link.icon;
 
