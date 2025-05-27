@@ -3,6 +3,7 @@
 import { useAppSelector } from "@/hooks/hook";
 import React, { useEffect, useState } from "react";
 import AddTaskButton from "./AddTaskButton";
+import Button from "./Button";
 
 const OverviewHeader = () => {
   const { userInfo } = useAppSelector((state) => state.user);
@@ -15,8 +16,9 @@ const OverviewHeader = () => {
     <div className="flex justify-between items-center">
       <h3 className="text-xl font-medium">Hello, {userInfo?.name}</h3>
 
-      <div>
+      <div className="flex gap-2">
         <AddTaskButton />
+        <Button>Add goal</Button>
       </div>
     </div>
   );

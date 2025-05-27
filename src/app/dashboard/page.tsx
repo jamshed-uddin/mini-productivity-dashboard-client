@@ -1,7 +1,8 @@
 import DailyQuote from "@/components/DailyQuote";
 import Goals from "@/components/Goals";
 import OverviewHeader from "@/components/OverviewHeader";
-import Tasks from "@/components/Tasks";
+import OverviewTasks from "@/components/OverviewTasks";
+
 import React from "react";
 
 const DashboardHome = () => {
@@ -10,11 +11,13 @@ const DashboardHome = () => {
       <div>
         <OverviewHeader />
       </div>
-      <div className="h-40  bg-white">{/* <DailyQuote /> */}</div>
+      <div className="h-40  bg-white">
+        <DailyQuote />
+      </div>
       <div className=" flex-1 flex w-full gap-5">
         <div className="h-full bg-white rounded-xl  flex-1 p-4">
-          <h2 className="text-2xl font-medium">Tasks</h2>
-          <Tasks />
+          <h2 className="text-2xl font-medium mb-3">Today&rsquo;s tasks</h2>
+          <OverviewTasks />
         </div>
         <div className="h-full bg-white rounded-xl   flex-1 p-4">
           <h2 className="text-2xl font-medium">Goals</h2>

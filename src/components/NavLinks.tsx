@@ -11,17 +11,17 @@ import React from "react";
 const links = [
   {
     name: "Overview",
-    href: "/dashbord",
+    href: "/dashboard",
     icon: RectangleGroupIcon,
   },
   {
-    name: "Task",
-    href: "/dashbord/tasks",
+    name: "Tasks",
+    href: "/dashboard/tasks",
     icon: ListBulletIcon,
   },
   {
     name: "Goals",
-    href: "/dashbord/goals",
+    href: "/dashboard/goals",
     icon: ClipboardDocumentListIcon,
   },
 ];
