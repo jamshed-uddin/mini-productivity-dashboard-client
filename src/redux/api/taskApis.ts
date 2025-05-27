@@ -17,6 +17,7 @@ const taskApis = baseApi.injectEndpoints({
         method: "POST",
         body: taskInfo,
       }),
+      invalidatesTags: ["Tasks"],
     }),
 
     updateTask: builder.mutation({
@@ -40,6 +41,7 @@ const taskApis = baseApi.injectEndpoints({
 export const {
   useGetTasksQuery,
   useGetTaskByIdQuery,
+  useCreateTaskMutation,
   useUpdateTaskMutation,
   useDeleteTaskMutation,
 } = taskApis;

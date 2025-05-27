@@ -1,5 +1,6 @@
 import DashboardNav from "@/components/DashboardNav";
 import React, { ReactNode } from "react";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -14,6 +15,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         className="w-full lg:w-4/5 
       bg-slate-50"
       >
+        <Toaster />
         {children}
       </div>
     </div>

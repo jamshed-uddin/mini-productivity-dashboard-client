@@ -4,14 +4,22 @@ import React from "react";
 import Button from "./Button";
 import { Task } from "@/lib/types";
 import { useForm } from "react-hook-form";
-
+import toast from "react-hot-toast";
 interface TaskFormProps {
   initialData?: Task;
   onSubmit: (data: Task) => void;
   onFormCancel?: () => void;
+  isSubmitting?: boolean;
+  onSubmitSuccess?: () => void;
 }
 
-const TaskForm = ({ initialData, onSubmit, onFormCancel }: TaskFormProps) => {
+const TaskForm = ({
+  initialData,
+  onSubmit,
+  onFormCancel,
+  isSubmitting = false,
+  onSubmitSuccess,
+}: TaskFormProps) => {
   const {
     register,
     reset,
@@ -19,9 +27,16 @@ const TaskForm = ({ initialData, onSubmit, onFormCancel }: TaskFormProps) => {
     formState: { errors },
   } = useForm<Task>();
 
-  const handleFormSubmit = (data: Task) => {
-    onSubmit(data);
-    reset();
+  const handleFormSubmit = async (data: Task) => {
+    try {
+      const res = await onSubmit(data);
+      toast.success("Task added");
+      reset();
+      onSubmitSuccess?.();
+      console.log("task res", res);
+    } catch {
+      toast.error("Failed to add task");
+    }
   };
 
   return (
@@ -94,11 +109,7 @@ const TaskForm = ({ initialData, onSubmit, onFormCancel }: TaskFormProps) => {
               {...register("goal")}
               id="goal"
               className="focus:outline-0 border border-black rounded-lg"
-            >
-              <option value="low">Low</option>
-              <option value="medium">Medium</option>
-              <option value="high">High</option>
-            </select>
+            ></select>
           </div>
         </div>
         <div className="flex items-center justify-end gap-2">
@@ -112,7 +123,9 @@ const TaskForm = ({ initialData, onSubmit, onFormCancel }: TaskFormProps) => {
           >
             Cancel
           </button>
-          <Button>Add task</Button>
+          <Button loading={isSubmitting} disabled={isSubmitting}>
+            Add task
+          </Button>
         </div>
       </form>
     </div>
