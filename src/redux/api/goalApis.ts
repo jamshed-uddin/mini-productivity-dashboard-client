@@ -4,6 +4,7 @@ const goalApis = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getGoals: builder.query({
       query: () => "/goals",
+      providesTags: ["Goals"],
     }),
     getGoalById: builder.query({
       query: (goalId) => `/goals/${goalId}`,
@@ -14,6 +15,7 @@ const goalApis = baseApi.injectEndpoints({
         method: "POST",
         body: goalInfo,
       }),
+      invalidatesTags: ["Goals"],
     }),
 
     updateGoal: builder.mutation({
@@ -22,6 +24,7 @@ const goalApis = baseApi.injectEndpoints({
         method: "PUT",
         body: goalUpdates,
       }),
+      invalidatesTags: ["Goals"],
     }),
 
     deleteGoal: builder.mutation({
@@ -29,6 +32,7 @@ const goalApis = baseApi.injectEndpoints({
         url: `/goals/${goalId}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["Goals"],
     }),
   }),
 });

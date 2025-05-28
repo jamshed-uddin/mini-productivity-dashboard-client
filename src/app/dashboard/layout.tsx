@@ -23,13 +23,13 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
       </div>
       <div
         className="w-full lg:w-4/5 
-      bg-slate-50 absolute lg:static inset-0"
+      bg-slate-50 absolute lg:static inset-0 h-full overflow-y-auto"
       >
         <Toaster />
 
         <OverviewHeader />
 
-        <div className="px-2">{children}</div>
+        <div className="px-5 ">{children}</div>
       </div>
     </div>
   );

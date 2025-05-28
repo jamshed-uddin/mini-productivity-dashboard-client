@@ -1,24 +1,20 @@
 "use client";
 
-import type { Task } from "@/lib/types";
+import { Goal } from "@/lib/types";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import clsx from "clsx";
-import React, { ChangeEvent, useState } from "react";
-import Modal from "./Modal";
-import TaskForm from "./TaskForm";
-import {
-  useDeleteTaskMutation,
-  useUpdateTaskMutation,
-} from "@/redux/api/taskApis";
+import React, { useState } from "react";
 import Button from "./Button";
+import Modal from "./Modal";
+import GoalForm from "./GoalForm";
+import {
+  useDeleteGoalMutation,
+  useUpdateGoalMutation,
+} from "@/redux/api/goalApis";
 import toast from "react-hot-toast";
 
-const Task = ({ task }: { task: Task }) => {
-  const [isComplete, setIsComplete] = useState(
-    task.status === "pending" ? false : true
-  );
-  const [update, { isLoading: isUpdating }] = useUpdateTaskMutation();
-  const [deleteTask, { isLoading: isDeleting }] = useDeleteTaskMutation();
+const GoalItem = ({ goal }: { goal: Goal }) => {
+  const [update, { isLoading: isUpdating }] = useUpdateGoalMutation();
+  const [deleteGoal, { isLoading: isDeleting }] = useDeleteGoalMutation();
 
   const [isOpen, setIsOpen] = useState(false);
   const closeModal = () => setIsOpen(false);
@@ -31,32 +27,19 @@ const Task = ({ task }: { task: Task }) => {
     openModal();
   };
 
-  const updateTaskHandler = (data: Partial<Task>) => {
+  const updateGoalHandler = (data: Partial<Goal>) => {
     return update(data).unwrap();
   };
 
   const deleteTaskHandler = () => {
-    if (!task._id) return;
+    if (!goal._id) return;
     try {
-      deleteTask(task?._id).unwrap();
-      toast.success("Task deleted");
+      deleteGoal(goal?._id).unwrap();
+      toast.success("Goal deleted");
     } catch {
       toast.error("Failed to delete task");
     } finally {
       closeModal();
-    }
-  };
-
-  const TaskCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.checked;
-    setIsComplete((p) => !p);
-    const status = value ? "completed" : "pending";
-
-    try {
-      update({ _id: task._id, status }).unwrap();
-    } catch {
-      toast.error("Failed to mark task completed");
-      setIsComplete(false);
     }
   };
 
@@ -66,9 +49,9 @@ const Task = ({ task }: { task: Task }) => {
         <Modal open={isOpen} close={closeModal}>
           {action === "update" ? (
             <div>
-              <TaskForm
-                initialData={task}
-                onSubmit={updateTaskHandler}
+              <GoalForm
+                initialData={goal}
+                onSubmit={updateGoalHandler}
                 onFormCancel={closeModal}
                 onSubmitSuccess={closeModal}
                 isSubmitting={isUpdating}
@@ -78,11 +61,11 @@ const Task = ({ task }: { task: Task }) => {
             <div>
               <h3 className="text-sm font-medium mb-1">Delete task?</h3>
               <p>
-                The <span className="font-medium">{task.title}</span> task will
+                The <span className="font-medium">{goal.title}</span> goal will
                 be permanently deleted.
               </p>
               <div className="flex items-center justify-end gap-2 mt-3">
-                <Button variant="secondary" onClick={closeModal}>
+                <Button onClick={closeModal} variant="secondary">
                   Cancel
                 </Button>
                 <Button
@@ -98,22 +81,10 @@ const Task = ({ task }: { task: Task }) => {
           )}
         </Modal>
       )}
-      <div className="flex  items-start gap-2 py-2">
-        <div>
-          <input
-            checked={isComplete}
-            onChange={TaskCheckboxChange}
-            type="checkbox"
-            name=""
-            id=""
-            disabled={isUpdating}
-          />
-        </div>
-        <div className="flex-1">
-          <h2 className={clsx(isComplete ? "line-through" : "")}>
-            {task.title}
-          </h2>
-          <p className="text-sm">{task.description}</p>
+      <div className="flex justify-between items-center">
+        <div className="py-2">
+          <h3 className="">{goal.title}</h3>
+          <p className="text-sm">{`${goal.description?.slice(0, 30)}...`}</p>
         </div>
         <div className="flex items-center gap-3">
           <button
@@ -134,4 +105,4 @@ const Task = ({ task }: { task: Task }) => {
   );
 };
 
-export default Task;
+export default GoalItem;

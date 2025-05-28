@@ -26,9 +26,10 @@ const GoalForm = ({
     formState: { errors },
   } = useForm<Goal>();
 
-  const handleFormSubmit = (data: Goal) => {
+  const handleFormSubmit = async (data: Goal) => {
     try {
-      const res = onSubmit(data);
+      const res = await onSubmit(data);
+
       toast.success(`Goal ${initialData?._id ? "updated" : "added"}`);
       reset();
       onSubmitSuccess?.();
@@ -74,16 +75,16 @@ const GoalForm = ({
         />
 
         <div className="flex items-center justify-end gap-2">
-          <button
+          <Button
+            variant="secondary"
             onClick={() => {
               onFormCancel?.();
               reset();
             }}
             type="button"
-            className="bg-gray-300 px-4 py-2 rounded-xl active:scale-95 font-medium cursor-pointer"
           >
             Cancel
-          </button>
+          </Button>
           <Button loading={isSubmitting} disabled={isSubmitting || !formChange}>
             Save
           </Button>

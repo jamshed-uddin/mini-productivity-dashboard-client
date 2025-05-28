@@ -1,6 +1,6 @@
 "use client";
 
-import { Dialog, DialogPanel } from "@headlessui/react";
+import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { ReactNode } from "react";
 
@@ -24,6 +24,8 @@ const Modal = ({
       className="relative z-30 focus:outline-none"
       onClose={close}
     >
+      <DialogBackdrop className="fixed inset-0 bg-black/30" />
+
       <div className="fixed inset-0 z-40 w-screen overflow-y-auto">
         <div className="flex min-h-full items-center justify-center p-4">
           <DialogPanel

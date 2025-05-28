@@ -9,7 +9,7 @@ import React from "react";
 
 const DashboardHome = () => {
   return (
-    <div className="lg:h-screen w-full flex flex-col gap-5 p-5">
+    <div className="lg:h-screen w-full flex flex-col gap-5 ">
       <div className="h-40  bg-white">
         <DailyQuote />
       </div>

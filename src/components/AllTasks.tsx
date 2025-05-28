@@ -6,12 +6,13 @@ import { useGetTasksQuery } from "@/redux/api/taskApis";
 import React from "react";
 import Tasks from "./Tasks";
 import formatDate from "@/lib/formatDate";
+import { TasksSeleton } from "./Skeletons";
 
 const AllTasks = () => {
   const { data, isLoading } = useGetTasksQuery(undefined);
 
   if (isLoading) {
-    return null;
+    return <TasksSeleton />;
   }
 
   const tasksData = data?.data;
