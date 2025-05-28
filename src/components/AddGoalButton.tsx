@@ -14,7 +14,6 @@ const AddGoalButton = () => {
   const [create, { isLoading }] = useCreateGoalMutation();
 
   const createGoalHandler = (data: Goal) => {
-    console.log(data);
     return create(data).unwrap();
   };
 

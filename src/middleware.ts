@@ -4,8 +4,6 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const token = request.cookies.get("token")?.value;
   const { pathname } = request.nextUrl;
-  console.log("req url", request.url);
-  console.log("pathname", pathname);
 
   const privateRoutes = ["/dashboard", "/dashboard/tasks", "/dashboard/goals"];
   const authRoutes = ["/login", "/register"];

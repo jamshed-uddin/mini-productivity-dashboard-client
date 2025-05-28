@@ -15,7 +15,6 @@ const OverviewHeader = () => {
     setMounted(true);
   }, []);
   const pathname = usePathname();
-  console.log(pathname);
 
   const dispatch = useAppDispatch();
 

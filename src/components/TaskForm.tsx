@@ -32,11 +32,10 @@ const TaskForm = ({
 
   const handleFormSubmit = async (data: Task) => {
     try {
-      const res = await onSubmit(data);
+      await onSubmit(data);
       toast.success(`Task ${initialData?._id ? "updated" : "added"}`);
       reset();
       onSubmitSuccess?.();
-      console.log("task res", res);
     } catch {
       toast.error(`Failed to ${initialData?._id ? "update" : "add"} task`);
     }

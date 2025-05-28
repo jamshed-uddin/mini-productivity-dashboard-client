@@ -28,12 +28,11 @@ const GoalForm = ({
 
   const handleFormSubmit = async (data: Goal) => {
     try {
-      const res = await onSubmit(data);
+      await onSubmit(data);
 
       toast.success(`Goal ${initialData?._id ? "updated" : "added"}`);
       reset();
       onSubmitSuccess?.();
-      console.log("goal res", res);
     } catch {
       toast.error(`Failed to ${initialData?._id ? "update" : "add"} Goal`);
     }
