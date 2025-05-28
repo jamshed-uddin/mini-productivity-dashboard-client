@@ -123,7 +123,7 @@ const TaskForm = ({
               {...register("goal")}
               id="goal"
               className="focus:outline-0 border border-black rounded-lg"
-              value={initialData?.goal?._id || ""}
+              defaultValue={initialData?.goal?._id || ""}
             >
               <option value="">Select a goal</option>
               {!isLoading &&

@@ -12,6 +12,7 @@ import {
 } from "@/redux/api/taskApis";
 import Button from "./Button";
 import toast from "react-hot-toast";
+import TaskDetails from "./TaskDetails";
 
 const Task = ({ task }: { task: Task }) => {
   const [isComplete, setIsComplete] = useState(
@@ -67,8 +68,12 @@ const Task = ({ task }: { task: Task }) => {
   return (
     <>
       {isDetailModalOpen && (
-        <Modal open={isDetailModalOpen} close={closeDetailModal}>
-          <div>detail modal</div>
+        <Modal
+          open={isDetailModalOpen}
+          close={closeDetailModal}
+          internalCloseButton={true}
+        >
+          <TaskDetails task={task} />
         </Modal>
       )}
 

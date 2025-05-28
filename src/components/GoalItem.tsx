@@ -1,6 +1,6 @@
 "use client";
 
-import { Goal } from "@/lib/types";
+import { Goal, Task } from "@/lib/types";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import Button from "./Button";
@@ -11,12 +11,25 @@ import {
   useUpdateGoalMutation,
 } from "@/redux/api/goalApis";
 import toast from "react-hot-toast";
+import GoalDetails from "./GoalDetails";
+import { useGetTasksQuery } from "@/redux/api/taskApis";
 
 const GoalItem = ({ goal }: { goal: Goal }) => {
   const [update, { isLoading: isUpdating }] = useUpdateGoalMutation();
   const [deleteGoal, { isLoading: isDeleting }] = useDeleteGoalMutation();
+  const {
+    data,
+    isLoading: isTaskLoading,
+    isError: isTaskError,
+  } = useGetTasksQuery(undefined);
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
+  const openDetailModal = () => setIsDetailModalOpen(true);
+  const closeDetailModal = () => setIsDetailModalOpen(false);
+
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
@@ -43,8 +56,28 @@ const GoalItem = ({ goal }: { goal: Goal }) => {
     }
   };
 
+  const getAssociatedTasks = (): Task[] => {
+    if (isTaskLoading || isTaskError || !data?.data) return [];
+
+    const associatedTasks = data?.data.filter(
+      (task) => task.goal?._id === goal._id
+    );
+    return associatedTasks;
+  };
+
   return (
     <>
+      {/* goal details modal */}
+      {isDetailModalOpen && (
+        <Modal
+          open={isDetailModalOpen}
+          close={closeDetailModal}
+          internalCloseButton={true}
+        >
+          <GoalDetails goal={{ ...goal, tasks: getAssociatedTasks() }} />{" "}
+        </Modal>
+      )}
+      {/* update and delete modal */}
       {isOpen && (
         <Modal open={isOpen} close={closeModal}>
           {action === "update" ? (
@@ -81,7 +114,11 @@ const GoalItem = ({ goal }: { goal: Goal }) => {
           )}
         </Modal>
       )}
-      <div className="flex justify-between items-center">
+      <div
+        onClick={openDetailModal}
+        className="flex justify-between items-center cursor-pointer"
+      >
+        {/* goal info */}
         <div className="py-2">
           <h3 className="">{goal.title}</h3>
           <p className="text-sm">
@@ -92,16 +129,24 @@ const GoalItem = ({ goal }: { goal: Goal }) => {
               : ""}
           </p>
         </div>
+
+        {/* actions */}
         <div className="flex items-center gap-3">
           <button
             className="p-1 hover:text-indigo-500 cursor-pointer"
-            onClick={() => openAction("update")}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              openAction("update");
+            }}
           >
             <PencilIcon className="w-4 h-4" />
           </button>
           <button
             className="p-1 hover:text-indigo-500 cursor-pointer"
-            onClick={() => openAction("delete")}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              openAction("delete");
+            }}
           >
             <TrashIcon className="w-4 h-4" />
           </button>

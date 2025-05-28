@@ -30,7 +30,7 @@ const taskApis = baseApi.injectEndpoints({
         method: "PUT",
         body: taskUpdates,
       }),
-      invalidatesTags: ["Tasks"],
+      invalidatesTags: ["Tasks", "Goals"],
     }),
 
     deleteTask: builder.mutation<{ message: string }, string>({

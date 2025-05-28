@@ -25,5 +25,7 @@ export interface Goal {
   title: string;
   description: string;
   status: "active" | "completed";
-  tasks: Task[];
+  tasks?: Task[];
+  createdAt?: string;
+  updatedAt?: string;
 }
