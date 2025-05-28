@@ -30,7 +30,7 @@ const DashboardNav = () => {
       >
         {/* name and nav opener */}
         <div className="shrink-0   w-full flex  justify-between">
-          <h3 className="text-indigo-500 text-2xl font-bold">Tasker</h3>
+          <h3 className="text-indigo-500 text-xl font-bold">Stride</h3>
           <button
             onClick={toggleNav}
             className={clsx("cursor-pointer py-2   lg:hidden")}
