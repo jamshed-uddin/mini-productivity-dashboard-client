@@ -16,15 +16,15 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const baseStyle =
-    "bg-indigo-500 text-white px-4 py-2 rounded-xl active:scale-95 font-medium  relative disabled:cursor-not-allowed cursor-pointer";
+    "bg-indigo-500 text-white text-sm lg:text-base lg:px-3 px-2 lg:py-1.5 py-1 rounded-lg lg:rounded-xl active:scale-95 font-medium  relative disabled:cursor-not-allowed cursor-pointer text-nowrap";
 
   const variantStyles: {
     primary: string;
     secondary: string;
     destructive: string;
   } = {
-    primary: "bg-indigo-500 text-white hover:bg-indigo-600",
-    secondary: "bg-gray-200 text-gray-800 hover:bg-gray-300",
+    primary: "bg-indigo-600 text-white hover:bg-indigo-500",
+    secondary: "bg-gray-200 text-gray-800 ",
     destructive: "bg-red-500 text-white hover:bg-red-600",
   };
 

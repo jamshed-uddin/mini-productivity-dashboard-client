@@ -1,4 +1,5 @@
 import DashboardNav from "@/components/DashboardNav";
+import OverviewHeader from "@/components/OverviewHeader";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import React, { ReactNode } from "react";
@@ -13,19 +14,22 @@ const DashboardLayout = async ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <div className="h-screen flex ">
+    <div className="h-screen flex w-full ">
       <div
         className="w-full lg:w-1/5 
-       p-2 bg-indigo-50"
+       "
       >
         <DashboardNav />
       </div>
       <div
         className="w-full lg:w-4/5 
-      bg-slate-50"
+      bg-slate-50 absolute lg:static inset-0"
       >
         <Toaster />
-        {children}
+
+        <OverviewHeader />
+
+        <div className="px-2">{children}</div>
       </div>
     </div>
   );

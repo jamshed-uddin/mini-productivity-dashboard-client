@@ -19,3 +19,11 @@ export interface Task {
   createdAt?: string;
   updatedAt?: string;
 }
+
+export interface Goal {
+  _id?: string;
+  title: string;
+  description: string;
+  status: "active" | "completed";
+  tasks: Task[];
+}

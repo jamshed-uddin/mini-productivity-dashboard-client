@@ -20,17 +20,18 @@ const AddTaskButton = () => {
   return (
     <div>
       <Button onClick={openModal}>Add task</Button>
-      <Modal open={isOpen} close={closeModal}>
-        <TaskForm
-          onSubmit={createTaskHandler}
-          onFormCancel={closeModal}
-          isSubmitting={isLoading}
-          onSubmitSuccess={closeModal}
-        />
-      </Modal>
+      {isOpen && (
+        <Modal open={isOpen} close={closeModal}>
+          <TaskForm
+            onSubmit={createTaskHandler}
+            onFormCancel={closeModal}
+            isSubmitting={isLoading}
+            onSubmitSuccess={closeModal}
+          />
+        </Modal>
+      )}
     </div>
   );
 };
 
 export default AddTaskButton;
-<Button>Add task</Button>;

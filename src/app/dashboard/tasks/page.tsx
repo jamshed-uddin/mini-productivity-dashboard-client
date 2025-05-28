@@ -5,12 +5,7 @@ import React from "react";
 
 const TasksPage = () => {
   return (
-    <div className="p-5">
-      <div className="mb-4  flex justify-between items-center">
-        <h2 className="text-xl font-semibold">Tasks</h2>
-        <AddTaskButton />
-      </div>
-
+    <div className="">
       <AllTasks />
     </div>
   );

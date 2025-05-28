@@ -1,7 +1,7 @@
 import { Task } from "./types";
 
 const groupTaskByDate = (tasks: Task[]): Record<string, Task[]> => {
-  return tasks.reduce((acc, task) => {
+  return tasks?.reduce((acc, task) => {
     const date = task.date?.split("T")[0] as string;
 
     if (!acc[date]) {

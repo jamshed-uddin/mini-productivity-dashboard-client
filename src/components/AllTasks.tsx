@@ -18,8 +18,6 @@ const AllTasks = () => {
   const groupedTasks = groupTaskByDate(tasksData as Task[]);
   const groupDates = Object.keys(groupedTasks);
 
-  console.log(groupedTasks);
-
   return (
     <div>
       <div className="space-y-4">

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface InitialState {
   userInfo: UserInfo | null;
+  isSideNavOpen: boolean;
 }
 
 const storedUserInfo =
@@ -10,6 +11,7 @@ const storedUserInfo =
 
 const initialState: InitialState = {
   userInfo: storedUserInfo ? JSON.parse(storedUserInfo) : null,
+  isSideNavOpen: false,
 };
 
 const userSlice = createSlice({
@@ -24,8 +26,12 @@ const userSlice = createSlice({
       state.userInfo = null;
       localStorage.removeItem("userInfo");
     },
+
+    toggleSideNav: (state) => {
+      state.isSideNavOpen = !state.isSideNavOpen;
+    },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+export const { setUser, removeUser, toggleSideNav } = userSlice.actions;
 export default userSlice.reducer;
