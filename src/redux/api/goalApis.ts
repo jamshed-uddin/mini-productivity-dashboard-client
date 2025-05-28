@@ -1,15 +1,19 @@
+import { Goal } from "@/lib/types";
 import { baseApi } from "./baseApi";
 
 const goalApis = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getGoals: builder.query({
+    getGoals: builder.query<{ message: string; data: Goal[] }, undefined>({
       query: () => "/goals",
       providesTags: ["Goals"],
     }),
-    getGoalById: builder.query({
+    getGoalById: builder.query<{ message: string; data: Goal }, string>({
       query: (goalId) => `/goals/${goalId}`,
     }),
-    createGoal: builder.mutation({
+    createGoal: builder.mutation<
+      { message: string; data: Goal },
+      Partial<Goal>
+    >({
       query: (goalInfo) => ({
         url: "/goals",
         method: "POST",
@@ -18,7 +22,10 @@ const goalApis = baseApi.injectEndpoints({
       invalidatesTags: ["Goals"],
     }),
 
-    updateGoal: builder.mutation({
+    updateGoal: builder.mutation<
+      { message: string; data: Goal },
+      Partial<Goal>
+    >({
       query: (goalUpdates) => ({
         url: `/goals/${goalUpdates._id}`,
         method: "PUT",
@@ -27,7 +34,7 @@ const goalApis = baseApi.injectEndpoints({
       invalidatesTags: ["Goals"],
     }),
 
-    deleteGoal: builder.mutation({
+    deleteGoal: builder.mutation<{ message: string }, string>({
       query: (goalId) => ({
         url: `/goals/${goalId}`,
         method: "DELETE",

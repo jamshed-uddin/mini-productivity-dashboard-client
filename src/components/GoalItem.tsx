@@ -84,7 +84,13 @@ const GoalItem = ({ goal }: { goal: Goal }) => {
       <div className="flex justify-between items-center">
         <div className="py-2">
           <h3 className="">{goal.title}</h3>
-          <p className="text-sm">{`${goal.description?.slice(0, 30)}...`}</p>
+          <p className="text-sm">
+            {goal.description
+              ? goal.description.length > 30
+                ? `${goal.description?.slice(0, 30)}...`
+                : goal.description
+              : ""}
+          </p>
         </div>
         <div className="flex items-center gap-3">
           <button

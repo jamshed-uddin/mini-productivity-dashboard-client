@@ -6,7 +6,7 @@ export const TaskItemSkeleton = () => {
   );
 };
 
-export const TasksSeleton = ({ amount = 10 }: { amount?: number }) => {
+export const TasksSkeleton = ({ amount = 10 }: { amount?: number }) => {
   return (
     <div className="space-y-3">
       {Array.from({ length: amount }).map((item, idx) => (
@@ -20,12 +20,12 @@ const DashboardSkeleton = () => {
   return (
     <div className="w-full h-fit flex flex-col space-y-10">
       <div className="h-36 w-full rounded-xl bg-gray-200 animate-pulse"></div>
-      <div className="w-full flex gap-5">
+      <div className="w-full flex flex-col lg:flex-row space-y-5 gap-x-5">
         <div className="flex-1">
-          <TasksSeleton amount={3} />
+          <TasksSkeleton amount={3} />
         </div>
         <div className="flex-1">
-          <TasksSeleton amount={3} />
+          <TasksSkeleton amount={3} />
         </div>
       </div>
     </div>

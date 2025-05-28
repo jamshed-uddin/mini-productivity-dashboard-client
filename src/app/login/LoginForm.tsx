@@ -9,6 +9,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useAppDispatch } from "@/hooks/hook";
 import { setUser } from "@/redux/features/userSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   email: string;
@@ -19,6 +20,7 @@ const LoginForm = () => {
   const [login, { isLoading }] = useLoginUserMutation();
   const [error, setError] = useState("");
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const {
     register,
@@ -38,6 +40,7 @@ const LoginForm = () => {
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       dispatch(setUser(res.data));
       reset();
+      router.replace("/dashboard");
     } catch (error) {
       const fetchError = error as FetchBaseQueryError;
       setError(

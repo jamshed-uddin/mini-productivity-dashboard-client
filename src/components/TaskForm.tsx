@@ -5,6 +5,7 @@ import Button from "./Button";
 import { Task } from "@/lib/types";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useGetGoalsQuery } from "@/redux/api/goalApis";
 interface TaskFormProps {
   initialData?: Task;
   onSubmit: (data: Task) => void;
@@ -21,7 +22,7 @@ const TaskForm = ({
   onSubmitSuccess,
 }: TaskFormProps) => {
   const [formChange, setFormChange] = useState(false);
-
+  const { data, isLoading, isError } = useGetGoalsQuery(undefined);
   const {
     register,
     reset,
@@ -44,7 +45,7 @@ const TaskForm = ({
   return (
     <div>
       <form
-        className="space-y-4"
+        className="space-y-7"
         onSubmit={handleSubmit(handleFormSubmit)}
         onChange={() => setFormChange(true)}
       >
@@ -55,6 +56,8 @@ const TaskForm = ({
             defaultValue={initialData._id || ""}
           />
         )}
+
+        {/* title */}
         <input
           {...register("title", { required: "Title is required" })}
           type="text"
@@ -66,6 +69,8 @@ const TaskForm = ({
         {errors.title && (
           <span className="text-red-500 text-sm">{errors.title.message}</span>
         )}
+
+        {/* description */}
         <textarea
           {...register("description")}
           name="description"
@@ -75,7 +80,9 @@ const TaskForm = ({
           rows={1}
           placeholder="Description"
         />
-        <div className="flex items-center gap-3">
+
+        {/* date and priority input */}
+        <div className="flex items-center flex-wrap gap-x-3 space-y-7 lg:space-y-0">
           <div className="flex items-center gap-2">
             <label htmlFor="date-picker " className="cursor-pointer">
               Date
@@ -107,17 +114,30 @@ const TaskForm = ({
             </select>
           </div>
         </div>
+
+        {/* goals to assign */}
         <div>
           <div className="flex items-center gap-2">
             <label htmlFor="goal">Add to a goal</label>
             <select
-              defaultValue={initialData?.goal || ""}
               {...register("goal")}
               id="goal"
               className="focus:outline-0 border border-black rounded-lg"
-            ></select>
+              value={initialData?.goal?._id || ""}
+            >
+              <option value="">Select a goal</option>
+              {!isLoading &&
+                !isError &&
+                data?.data.map((goal) => (
+                  <option key={goal._id} value={goal._id}>
+                    {goal.title}
+                  </option>
+                ))}
+            </select>
           </div>
         </div>
+
+        {/* buttons */}
         <div className="flex items-center justify-end gap-2">
           <Button
             variant="secondary"

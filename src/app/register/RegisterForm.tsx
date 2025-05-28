@@ -9,6 +9,7 @@ import { FetchBaseQueryError } from "@reduxjs/toolkit/query";
 import { useAppDispatch } from "@/hooks/hook";
 import { setUser } from "@/redux/features/userSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type FormData = {
   name: string;
@@ -21,6 +22,7 @@ const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const {
     reset,
     register,
@@ -35,6 +37,7 @@ const RegisterForm = () => {
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       dispatch(setUser(res.data));
       reset();
+      router.replace("/dashboard");
     } catch (error) {
       const fetchError = error as FetchBaseQueryError;
       setError(
@@ -95,7 +98,13 @@ const RegisterForm = () => {
           </label>
           <input
             type={showPassword ? "text" : "password"}
-            {...register("password", { required: "Password is required" })}
+            {...register("password", {
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            })}
             className={`border rounded-xl p-2 block w-full ${
               errors.password
                 ? "border-red-500 focus:outline-red-500"

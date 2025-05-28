@@ -21,6 +21,9 @@ const Task = ({ task }: { task: Task }) => {
   const [deleteTask, { isLoading: isDeleting }] = useDeleteTaskMutation();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+  const openDetailModal = () => setIsDetailModalOpen(true);
+  const closeDetailModal = () => setIsDetailModalOpen(false);
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
@@ -48,6 +51,7 @@ const Task = ({ task }: { task: Task }) => {
   };
 
   const TaskCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
     const value = e.target.checked;
     setIsComplete((p) => !p);
     const status = value ? "completed" : "pending";
@@ -62,6 +66,12 @@ const Task = ({ task }: { task: Task }) => {
 
   return (
     <>
+      {isDetailModalOpen && (
+        <Modal open={isDetailModalOpen} close={closeDetailModal}>
+          <div>detail modal</div>
+        </Modal>
+      )}
+
       {isOpen && (
         <Modal open={isOpen} close={closeModal}>
           {action === "update" ? (
@@ -98,7 +108,10 @@ const Task = ({ task }: { task: Task }) => {
           )}
         </Modal>
       )}
-      <div className="flex  items-start gap-2 py-2">
+      <div
+        onClick={openDetailModal}
+        className="flex  items-start gap-2 py-2 cursor-pointer"
+      >
         <div>
           <input
             checked={isComplete}
@@ -118,13 +131,19 @@ const Task = ({ task }: { task: Task }) => {
         <div className="flex items-center gap-3">
           <button
             className="p-1 hover:text-indigo-500 cursor-pointer"
-            onClick={() => openAction("update")}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              openAction("update");
+            }}
           >
             <PencilIcon className="w-4 h-4" />
           </button>
           <button
             className="p-1 hover:text-indigo-500 cursor-pointer"
-            onClick={() => openAction("delete")}
+            onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+              e.stopPropagation();
+              openAction("delete");
+            }}
           >
             <TrashIcon className="w-4 h-4" />
           </button>

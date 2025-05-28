@@ -28,6 +28,7 @@ const DashboardNav = () => {
           "flex flex-col h-full px-5  w-[80%] lg:w-full  bg-indigo-50  pt-2"
         )}
       >
+        {/* name and nav opener */}
         <div className="shrink-0   w-full flex  justify-between">
           <h3 className="text-indigo-500 text-2xl font-bold">Tasker</h3>
           <button
@@ -38,10 +39,12 @@ const DashboardNav = () => {
           </button>
         </div>
 
+        {/* navlinks */}
         <div className="flex-1 mt-5">
           <NavLinks />
         </div>
 
+        {/* logout button */}
         <div className="shrink-0 mb-5 pl-2">
           <LogoutButton />
         </div>

@@ -1,10 +1,10 @@
 export interface UserInfo {
-  createdAt: string;
-  email: string;
-  name: string;
-  updatedAt: string;
-  __v: number;
   _id: string;
+  name: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
+  __v?: number;
 }
 
 export interface Task {
@@ -13,7 +13,7 @@ export interface Task {
   description?: string;
   status: "pending" | "completed";
   priority: "low" | "medium" | "high";
-  goal?: string;
+  goal?: Goal;
   user: string;
   date?: string;
   createdAt?: string;
