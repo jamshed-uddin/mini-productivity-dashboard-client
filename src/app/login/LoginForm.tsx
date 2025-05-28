@@ -44,11 +44,10 @@ const LoginForm = () => {
     } catch (error) {
       const fetchError = error as FetchBaseQueryError;
       setError(
-        (fetchError.data as { message: string }).message ||
+        (fetchError?.data as { message: string })?.message ||
           "Something went wrong"
       );
     }
-    // TODO: Handle login logic
   };
 
   return (

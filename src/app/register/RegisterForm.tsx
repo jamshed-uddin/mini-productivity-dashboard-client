@@ -41,7 +41,7 @@ const RegisterForm = () => {
     } catch (error) {
       const fetchError = error as FetchBaseQueryError;
       setError(
-        (fetchError.data as { message: string }).message ||
+        (fetchError?.data as { message: string })?.message ||
           "Something went wrong"
       );
     }

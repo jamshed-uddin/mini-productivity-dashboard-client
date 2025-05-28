@@ -117,7 +117,9 @@ const Task = ({ task }: { task: Task }) => {
         onClick={openDetailModal}
         className="flex  items-start gap-2 py-2 cursor-pointer"
       >
-        <div>
+        <div
+          onClick={(e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()}
+        >
           <input
             checked={isComplete}
             onChange={TaskCheckboxChange}
