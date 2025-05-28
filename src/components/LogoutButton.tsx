@@ -12,8 +12,8 @@ const LogoutButton = () => {
   const dispath = useAppDispatch();
   const router = useRouter();
 
-  const handleLogout = async () => {
-    await logout(undefined).unwrap();
+  const handleLogout = () => {
+    logout(undefined);
     dispath(removeUser());
     router.replace("/login");
   };

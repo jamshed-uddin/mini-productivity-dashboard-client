@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ibmPlex.className} antialiased max-w-7xl h-screen overflow-hidden mx-auto`}
+        className={`${ibmPlex.className} antialiased max-w-7xl h-screen overflow-hidden mx-auto bg-white`}
       >
         <StoreProvider>{children}</StoreProvider>
       </body>
