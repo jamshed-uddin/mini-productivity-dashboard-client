@@ -13,14 +13,24 @@ import {
 import Button from "./Button";
 import toast from "react-hot-toast";
 import TaskDetails from "./TaskDetails";
+import { motion } from "motion/react";
 
-const Task = ({ task }: { task: Task }) => {
+const Task = ({
+  task,
+  animationDelay = 0.2,
+}: {
+  task: Task;
+  animationDelay: number;
+}) => {
   const [isComplete, setIsComplete] = useState(
     task.status === "pending" ? false : true
   );
+  // update task api
   const [update, { isLoading: isUpdating }] = useUpdateTaskMutation();
-  const [deleteTask, { isLoading: isDeleting }] = useDeleteTaskMutation();
 
+  // delete task api
+  const [deleteTask, { isLoading: isDeleting }] = useDeleteTaskMutation();
+  // modal opening state for task action and detail
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const openDetailModal = () => setIsDetailModalOpen(true);
@@ -28,6 +38,7 @@ const Task = ({ task }: { task: Task }) => {
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
+  // action state to conditionally open delete or update modal
   const [action, setAction] = useState("");
 
   const openAction = (actionStr: string) => {
@@ -35,10 +46,12 @@ const Task = ({ task }: { task: Task }) => {
     openModal();
   };
 
+  // update task handler function
   const updateTaskHandler = (data: Partial<Task>) => {
     return update(data).unwrap();
   };
 
+  //  delete task handler function
   const deleteTaskHandler = () => {
     if (!task._id) return;
     try {
@@ -51,6 +64,7 @@ const Task = ({ task }: { task: Task }) => {
     }
   };
 
+  // update status checkbox
   const TaskCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.stopPropagation();
     const value = e.target.checked;
@@ -67,6 +81,7 @@ const Task = ({ task }: { task: Task }) => {
 
   return (
     <>
+      {/* details modal */}
       {isDetailModalOpen && (
         <Modal
           open={isDetailModalOpen}
@@ -77,6 +92,7 @@ const Task = ({ task }: { task: Task }) => {
         </Modal>
       )}
 
+      {/* update or delete modal */}
       {isOpen && (
         <Modal open={isOpen} close={closeModal}>
           {action === "update" ? (
@@ -113,7 +129,14 @@ const Task = ({ task }: { task: Task }) => {
           )}
         </Modal>
       )}
-      <div
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 100, y: 0 }}
+        transition={{
+          duration: 0.3,
+          delay: animationDelay,
+        }}
+        viewport={{ once: true }}
         onClick={openDetailModal}
         className="flex  items-start gap-2 py-2 cursor-pointer"
       >
@@ -155,7 +178,7 @@ const Task = ({ task }: { task: Task }) => {
             <TrashIcon className="w-4 h-4" />
           </button>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

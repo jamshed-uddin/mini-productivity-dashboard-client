@@ -15,14 +15,18 @@ import GoalDetails from "./GoalDetails";
 import { useGetTasksQuery } from "@/redux/api/taskApis";
 
 const GoalItem = ({ goal }: { goal: Goal }) => {
+  //  udate delete api
   const [update, { isLoading: isUpdating }] = useUpdateGoalMutation();
   const [deleteGoal, { isLoading: isDeleting }] = useDeleteGoalMutation();
+
+  // task to show associated task to a goal
   const {
     data,
     isLoading: isTaskLoading,
     isError: isTaskError,
   } = useGetTasksQuery(undefined);
 
+  // modal open/close state
   const [isOpen, setIsOpen] = useState(false);
 
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
@@ -33,6 +37,7 @@ const GoalItem = ({ goal }: { goal: Goal }) => {
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
+  // action state to conditionally open delete or update modal
   const [action, setAction] = useState("");
 
   const openAction = (actionStr: string) => {
@@ -56,6 +61,7 @@ const GoalItem = ({ goal }: { goal: Goal }) => {
     }
   };
 
+  // filter associated task to a goal
   const getAssociatedTasks = (): Task[] => {
     if (isTaskLoading || isTaskError || !data?.data) return [];
 

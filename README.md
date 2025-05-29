@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Stride
 
-## Getting Started
+Stride is productivity app that enables users to keep track on daily tasks and goals.
 
-First, run the development server:
+## 🌐 Live Site
+
+🔗 [View Live](https://your-live-site-link.com)
+
+## 🔗 Server Repository
+
+Backend repo: [https://github.com/your-org/server-repo](https://github.com/your-org/server-repo)
+
+## 🏗 Core Features
+
+- User authentication
+- Task and goal management dashboard
+- Add/Get/Update/Delete functionality for both Task and Goal
+- Fully responsive design with Tailwind CSS
+- Date handling and formatting using date-fns
+- Interactive UI components (modals, toasts, animations)
+- Clean, modular TypeScript architecture
+
+## ✨ Enhancements
+
+- RTK Query for centralized and efficient data fetching and mutation
+- React hook form for form validation and proper error message
+- Enhanced error boundaries and fallback UIs
+- Loading skeleton UI for data loading state
+- Framer motion for animation
+
+## 💻 Tech Stack
+
+- Typescript
+
+- Next.js + React
+- Redux Toolkit
+- RTK Query
+- Tailwind CSS
+
+## 🏃‍♂️ Run Locally
+
+**Clone the repository**
+
+```bash
+git clone https://github.com/your-org/frontend-repo.git
+
+```
+
+**Change directory**
+
+```bash
+cd frontend-repo
+```
+
+**Install packages**
+
+```bash
+npm install
+```
+
+**Set environment variables**
+
+```env
+NEXT_PUBLIC_SERVER_URL=your-locally-running-server/api
+```
+
+**Start the app**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Dependencies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+"dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@headlessui/react": "^2.2.4",
+    "@heroicons/react": "^2.2.0",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@types/js-cookie": "^3.0.6",
+    "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
+    "js-cookie": "^3.0.5",
+    "motion": "^12.12.2",
+    "next": "15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-hook-form": "^7.56.4",
+    "react-hot-toast": "^2.5.2",
+    "react-redux": "^9.2.0",
+    "tailwind-merge": "^3.3.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+```
