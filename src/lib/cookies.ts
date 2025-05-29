@@ -3,7 +3,7 @@ export const setCookie = (name: string, value: string, days: number = 30) => {
   expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
 
   const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
-  const sameSite = "; sameSite=Strict";
+  const sameSite = "; sameSite=Lax";
 
   document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/${secure}${sameSite}`;
 };
