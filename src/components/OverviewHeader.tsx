@@ -46,7 +46,7 @@ const OverviewHeader = () => {
 
   if (!mounted) return null;
   return (
-    <div className="flex items-center gap-2 px-4 py-2">
+    <div className="flex items-center gap-2 px-4 py-3 lg:py-2">
       <div className="lg:hidden" onClick={() => dispatch(toggleSideNav())}>
         <Squares2X2Icon className="w-5 h-5" />
       </div>

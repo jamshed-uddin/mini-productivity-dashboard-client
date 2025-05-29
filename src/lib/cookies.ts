@@ -1,13 +1,20 @@
+import Cookies from "js-cookie";
+
 export const setCookie = (name: string, value: string, days: number = 30) => {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+  const options = {
+    expires: days,
+    path: "/",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict" as const,
+  };
 
-  const secure = process.env.NODE_ENV === "production" ? "; Secure" : "";
-  const sameSite = "; sameSite=Lax";
+  Cookies.set(name, value, options);
+};
 
-  document.cookie = `${name}=${value}; expires=${expires.toUTCString()}; path=/${secure}${sameSite}`;
+export const getCookie = (name: string): string | undefined => {
+  return Cookies.get(name);
 };
 
 export const deleteCookie = (name: string) => {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  Cookies.remove(name, { path: "/" });
 };

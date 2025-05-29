@@ -8,9 +8,12 @@ import Tasks from "./Tasks";
 import ErrorMessage from "./ErrorMessage";
 import { TasksSkeleton } from "./Skeletons";
 import NoTaskText from "./NoTaskText";
+import { getCookie } from "@/lib/cookies";
 
 const OverviewTasks = () => {
   const { data, isLoading, isError } = useGetTasksQuery(undefined);
+  const cookie = getCookie("token");
+  console.log("the cookie", cookie);
 
   if (isLoading) {
     return <TasksSkeleton amount={4} />;
