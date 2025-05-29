@@ -4,11 +4,11 @@ Stride is productivity app that enables users to keep track on daily tasks and g
 
 ## 🌐 Live Site
 
-🔗 [View Live](https://your-live-site-link.com)
+🔗 [View Live](https://stride-eta.vervel.app)
 
 ## 🔗 Server Repository
 
-Backend repo: [https://github.com/your-org/server-repo](https://github.com/your-org/server-repo)
+[server repository](https://github.com/jamshed-uddin/mini-productivity-dashboard-server)
 
 ## 🏗 Core Features
 
@@ -42,14 +42,14 @@ Backend repo: [https://github.com/your-org/server-repo](https://github.com/your-
 **Clone the repository**
 
 ```bash
-git clone https://github.com/your-org/frontend-repo.git
+git clone https://github.com/jamshed-uddin/mini-productivity-dashboard-client.git
 
 ```
 
 **Change directory**
 
 ```bash
-cd frontend-repo
+cd mini-productivity-dashboard-client
 ```
 
 **Install packages**
