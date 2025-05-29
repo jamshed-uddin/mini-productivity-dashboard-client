@@ -4,7 +4,7 @@ Stride is productivity app that enables users to keep track on daily tasks and g
 
 ## 🌐 Live Site
 
-🔗 [View Live](https://stride-eta.vervel.app)
+🔗 [View Live](https://stride-eta.vercel.app)
 
 ## 🔗 Server Repository
 
@@ -31,7 +31,6 @@ Stride is productivity app that enables users to keep track on daily tasks and g
 ## 💻 Tech Stack
 
 - Typescript
-
 - Next.js + React
 - Redux Toolkit
 - RTK Query
@@ -68,14 +67,12 @@ NEXT_PUBLIC_SERVER_URL=your-locally-running-server/api
 
 ```bash
 npm run dev
-
 ```
 
 ## Dependencies
 
 ```json
 "dependencies": {
-    "@dnd-kit/core": "^6.3.1",
     "@headlessui/react": "^2.2.4",
     "@heroicons/react": "^2.2.0",
     "@reduxjs/toolkit": "^2.8.2",
