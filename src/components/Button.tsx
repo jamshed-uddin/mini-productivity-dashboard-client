@@ -41,7 +41,7 @@ const Button = ({
       )}
       <span
         className={clsx(
-          "border px-3 py-1.5 block",
+          "px-3 py-1.5 block",
           loading ? "opacity-0" : "opacity-100"
         )}
       >
