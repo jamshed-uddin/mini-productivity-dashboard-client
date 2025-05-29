@@ -10,6 +10,7 @@ import { useAppDispatch } from "@/hooks/hook";
 import { setUser } from "@/redux/features/userSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { setCookie } from "@/lib/cookies";
 
 type FormData = {
   name: string;
@@ -36,6 +37,7 @@ const RegisterForm = () => {
       const res = await registerUser(data).unwrap();
       localStorage.setItem("userInfo", JSON.stringify(res.data));
       dispatch(setUser(res.data));
+      setCookie("token", res?.data.token);
       reset();
       router.replace("/dashboard");
     } catch (error) {
@@ -48,7 +50,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="lg:w-1/4">
+    <div className="lg:w-1/4 w-[90%]">
       <h3 className="uppercase text-lg mb-4 font-semibold">Register</h3>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
         <div>

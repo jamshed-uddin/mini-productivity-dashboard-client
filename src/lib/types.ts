@@ -4,6 +4,7 @@ export interface UserInfo {
   email: string;
   createdAt: string;
   updatedAt: string;
+  token: string;
   __v?: number;
 }
 

@@ -1,7 +1,13 @@
 import DashboardNav from "@/components/DashboardNav";
 import OverviewHeader from "@/components/OverviewHeader";
+import { Metadata } from "next";
 import React, { ReactNode } from "react";
 import { Toaster } from "react-hot-toast";
+
+export const metadata: Metadata = {
+  title: "Stride | Dashboard",
+  description: "",
+};
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
