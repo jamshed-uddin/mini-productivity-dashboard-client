@@ -6,6 +6,10 @@ Stride is productivity app that enables users to keep track on daily tasks and g
 
 🔗 [View Live](https://stride-eta.vercel.app)
 
+#### Test user credentials
+- email - johnwick@gmail.com
+- password - passjohnwick
+
 ## 🔗 Server Repository
 
 [server repository](https://github.com/jamshed-uddin/mini-productivity-dashboard-server)
